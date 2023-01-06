@@ -110,13 +110,33 @@ initVar() {
 	upgrade="yum -y update"
 	echoType='echo -e'
 
+
+	while getopts d:c:u: option; do
+		case "${option}" in
+		d)
+			idomain=${OPTARG}
+			;;
+		c)
+			icoreInstallType=${OPTARG}
+			;;
+		u)
+			iuuid=${OPTARG}
+			;;
+		esac
+	done
+
 	# Core supported cpu version
 	xrayCoreCPUVendor=""
 	v2rayCoreCPUVendor=""
 	hysteriaCoreCPUVendor=""
 
 	# domain name
+	
 	domain=
+	if [[ -n ${idomain} ]]; then
+		domain=${idomain}
+	fi
+	
 
 	# address of the CDN node
 	add=
@@ -128,7 +148,9 @@ initVar() {
 	# 2.v2ray-core installation
 	# 3.v2ray-core[xtls] installation
 	coreInstallType=
-
+	if [[ -n ${icoreInstallType} ]]; then
+		coreInstallType=${icoreInstallType}
+	fi
 	# core installation path
 	# coreInstallPath=
 
@@ -176,6 +198,9 @@ initVar() {
 
 	# UUID
 	currentUUID=
+	if [[ -n ${iuuid} ]]; then
+		currentUUID=${iuuid}
+	fi
 
 	# previousClients
 	previousClients=
