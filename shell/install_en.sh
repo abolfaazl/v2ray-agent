@@ -111,7 +111,7 @@ initVar() {
 	echoType='echo -e'
 
 
-	while getopts d:c:u: option; do
+	while getopts d:c:u:p: option; do
 		case "${option}" in
 		d)
 			idomain=${OPTARG}
@@ -121,6 +121,9 @@ initVar() {
 			;;
 		u)
 			iuuid=${OPTARG}
+			;;
+		p)
+			ipath=${OPTARG}
 			;;
 		esac
 	done
@@ -192,7 +195,9 @@ initVar() {
 
 	# random path
 	customPath=
-
+	if [[ -n ${ipath} ]]; then
+		customPath=${ipath}
+	fi
 	# centos version
 	centosVersion=
 
